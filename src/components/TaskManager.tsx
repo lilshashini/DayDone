@@ -107,6 +107,8 @@ export default function TaskManager({ userId, selectedDate, onTasksUpdated }: Ta
   };
 
   const handleSave = async () => {
+    // Reset any existing popup
+    setAchievementPopup({ visible: false, message: '', type: 'progress' });
     console.log('🚀 handleSave triggered', { userId, hoursWorked, tasksCount: tasks.length });
     
     if (!userId) {

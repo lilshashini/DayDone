@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Trophy, Target, Zap } from 'lucide-react';
+import { getWeekRange } from '../utils/dateUtils';
 import { supabase } from '../lib/supabase';
 
 interface PointsCardProps {
@@ -62,15 +63,13 @@ export default function PointsCard({ userId }: PointsCardProps) {
       const sortedUsers = Object.entries(userPoints).sort(([,a], [,b]) => Number(b) - Number(a));
       const rank = sortedUsers.findIndex(([id]) => id === userId) + 1;
 
-      // Get this week's points
-      const weekStart = new Date();
-      weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-      
+      // Get this week's points using date utils to avoid timezone/off-by-one issues
+      const { start: weekStart } = getWeekRange(new Date());
       const { data: weeklyHours } = await supabase
         .from('work_logs')
         .select('hours_worked')
         .eq('user_id', userId)
-        .gte('date', weekStart.toISOString().split('T')[0]);
+        .gte('date', weekStart);
 
       const thisWeekPoints = weeklyHours?.reduce((sum, log) => sum + Number(log.hours_worked), 0) || 0;
 

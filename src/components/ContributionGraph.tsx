@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Activity } from 'lucide-react';
 import { supabase } from '../lib/supabase'; // Assuming your supabase client is here
 import { getDaysInYear } from '../utils/dateUtils'; // Assuming your date utils are here
-import { format, parseISO, getDay, getMonth, startOfMonth } from 'date-fns';
+import { format, parseISO, getDay, getMonth } from 'date-fns';
 
 // A utility for conditionally joining class names
 const clsx = (...classes: (string | boolean | undefined)[]) => {

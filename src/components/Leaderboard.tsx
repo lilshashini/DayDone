@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Trophy, Award, Medal, Crown, Users } from 'lucide-react';
+import { Trophy, Medal, Crown, Users } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { getWeekRange, getMonthRange } from '../utils/dateUtils';
 import { useUser } from '../contexts/UserContext';
